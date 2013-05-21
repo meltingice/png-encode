@@ -18,7 +18,9 @@ class PNG
           output << b
         end
 
-        File.write(outfile, output.pack("C#{output.size}"))
+        file = File.new(outfile, 'wb')
+        file.write(output.pack("C#{output.size}"))
+        return file
       end
     end
   end
