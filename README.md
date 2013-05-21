@@ -1,6 +1,6 @@
-# Png::Encode
+# png-encode
 
-TODO: Write a gem description
+Encode/decode arbitrary data within the PNG file format.
 
 ## Installation
 
@@ -18,7 +18,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Right now there are only 2 straightforward methods to use:
+
+``` ruby
+require 'png-encode'
+
+PNG.encode(infile, outfile)
+PNG.decode(infile, outfile)
+```
+
+These will be made more flexible in the future.
 
 ## Contributing
 
