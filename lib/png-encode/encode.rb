@@ -7,7 +7,8 @@ class PNG
 
     module ClassMethods
       def encode(infile, outfile)
-        self.new(File.open(infile, 'rb')).encode(outfile)
+        infile = File.open(infile, 'rb') if infile.is_a?(String)
+        self.new(infile).encode(outfile)
       end
     end
 
