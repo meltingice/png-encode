@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = PNG::Encode::VERSION
   gem.authors       = ["Ryan LeFevre"]
   gem.email         = ["meltingice8917@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Encode/decode arbitrary data within the PNG file format}
+  gem.summary       = %q{Encode/decode arbitrary data within the PNG file format}
+  gem.homepage      = "http://github.com/meltingice/png-encode"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
