@@ -6,23 +6,19 @@ class PNG
     end
 
     module ClassMethods
-      def encode(infile, outfile)
-        infile = File.open(infile, 'rb') if infile.is_a?(String)
-        self.new(infile).encode(outfile)
+      def encode(infile, outfile, opts={})
+        infile = File.open(infile, 'r+b')
+        self.new(infile, opts).encode(outfile)
       end
     end
 
     module InstanceMethods
       def encode(outfile)
-        png = ChunkyPNG::Image.new(1, @data.size, ChunkyPNG::Color::TRANSPARENT)
-
-        i = 0
-        @data.each_byte do |b|
-          png[0, i] = b
-          i += 1
-        end
-
+        png = self.send "encode_#{@opts[:method]}"
         png.save outfile
+
+        @data = png
+        return @data
       end
     end
   end

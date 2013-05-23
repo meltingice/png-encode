@@ -6,21 +6,21 @@ class PNG
     end
 
     module ClassMethods
-      def decode(infile, outfile)
-        self.new(ChunkyPNG::Image.from_file(infile)).decode(outfile)
+      def decode(infile, outfile, opts={})
+        self.new(ChunkyPNG::Image.from_file(infile), opts).decode(outfile)
       end
     end
 
     module InstanceMethods
       def decode(outfile)
-        output = []
-        @data.pixels.each do |b|
-          output << b
-        end
+        data = self.send("decode_#{@opts[:method]}")
 
-        file = File.new(outfile, 'wb')
-        file.write(output.pack("C#{output.size}"))
-        return file
+        file = File.new(outfile, 'r+b')
+        file.write(data.pack("C#{data.size}"))
+        file.seek 0
+        
+        @data = file
+        return @data
       end
     end
   end
