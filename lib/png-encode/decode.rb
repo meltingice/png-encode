@@ -16,7 +16,7 @@ class PNG
         data = self.send("decode_#{@opts[:method]}")
 
         file = File.new(outfile, 'r+b')
-        file.write(data.pack("C#{data.size}"))
+        file.write(data)
         file.seek 0
         
         @data = file

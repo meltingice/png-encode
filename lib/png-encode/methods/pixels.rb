@@ -1,3 +1,5 @@
+# Converts the file byte-by-byte into a greyscale pixel and produces an image
+# that is 1 pixel wide by the byte length tall.
 class PNG
   module Method
     module Pixels
@@ -21,7 +23,7 @@ class PNG
           output << b
         end
 
-        return output
+        return output.pack("C#{output.size}")
       end
     end
   end

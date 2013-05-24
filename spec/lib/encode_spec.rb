@@ -42,4 +42,23 @@ describe 'Encoding' do
       image.pixels.should == @infile.bytes.to_a
     end
   end
+
+  describe "as metadata" do
+    it "is available" do
+      PNG.private_instance_methods.should include :encode_metadata
+    end
+
+    it "produces a valid PNG" do
+      PNG.encode @infile, @outfile, method: :metadata
+      ChunkyPNG::Image.from_file(@outfile.path)
+    end
+
+    it "produces a PNG with data" do
+      PNG.encode @infile, @outfile, method: :metadata
+      image = ChunkyPNG::Image.from_file(@outfile.path)
+
+      # Metadata encoder throws the file data into the metadata section
+      image.metadata['filedata'].should == @infile.read
+    end
+  end
 end
